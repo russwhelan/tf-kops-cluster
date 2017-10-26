@@ -30,14 +30,18 @@ data "aws_ami" "k8s_1_7_debian_jessie_ami" {
 locals {
   # Removes the last character of the FQDN if it is '.'
   cluster_fqdn = "${replace(var.cluster_fqdn, "/\\.$/", "")}"
+
   # AZ names and letters are used in tags and resources names
-  az_names = "${sort(data.aws_availability_zones.available.names)}"
+  az_names       = "${sort(data.aws_availability_zones.available.names)}"
   az_letters_csv = "${replace(join(",", local.az_names), data.aws_region.current.name, "")}"
-  az_letters = "${split(",", local.az_letters_csv)}"
+  az_letters     = "${split(",", local.az_letters_csv)}"
+
   # Number master resources to create. Defaults to the number of AZs in the region but should be 1 for regions with odd number of AZs.
   master_resource_count = "${var.force_single_master == 1 ? 1 : length(local.az_names)}"
+
   # Master AZs is used in the `kops create cluster` command
   master_azs = "${var.force_single_master == 1 ? element(local.az_names, 0) : join(",", local.az_names)}"
+
   # etcd AZs is used in tags for the master EBS volumes
   etcd_azs = "${var.force_single_master == 1 ? element(local.az_letters, 0) : local.az_letters_csv}"
 }
