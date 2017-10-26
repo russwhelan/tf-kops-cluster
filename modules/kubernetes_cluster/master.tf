@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "master" {
 
 resource "aws_elb" "master" {
   name         = "${var.cluster_name}-master"
-  subnets      = "${var.subnets_public.ids}"
+  subnets      = "${var.subnet_public_ids}"
   idle_timeout = 1200
 
   security_groups = [
@@ -66,7 +66,7 @@ resource "aws_elb" "master" {
 
 resource "aws_elb" "master_internal" {
   name         = "${var.cluster_name}-master-internal"
-  subnets      = "${var.subnets_private.ids}"
+  subnets      = "${var.subnet_private_ids}"
   internal     = true
   idle_timeout = 300
 
