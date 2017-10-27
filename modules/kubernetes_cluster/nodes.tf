@@ -65,7 +65,7 @@ resource "aws_launch_configuration" "node" {
     "${var.sg_allow_ssh}",
   ]
 
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   user_data                   = "${file("${path.module}/data/user_data.sh")}${data.template_file.node_user_data.rendered}"
 
   root_block_device = {
