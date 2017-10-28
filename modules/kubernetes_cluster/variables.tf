@@ -31,11 +31,6 @@ variable "master_iam_instance_profile" {}
 # IAM instance profile to use for the nodes
 variable "node_iam_instance_profile" {}
 
-# Private route table ID
-#variable "route_table_private_id" {}
-# Public route table ID
-#variable "route_table_public_id" {}
-# A list of CIDR networks to use for public subnets. Should be 1 per AZ.
 variable "subnet_public_ids" {
   type = "list"
 }
