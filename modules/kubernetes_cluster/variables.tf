@@ -70,6 +70,10 @@ variable "kubernetes_version" {
   default = "1.7.2"
 }
 
+variable "kops_version" {
+  default = "1.7.1"
+}
+
 # Cloudwatch log group log retention in days
 variable "cloudwatch_log_group_retention" {
   default = 30
