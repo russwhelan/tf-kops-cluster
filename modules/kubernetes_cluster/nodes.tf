@@ -50,8 +50,11 @@ data "template_file" "node_user_data" {
     kops_s3_bucket_id      = "${var.kops_s3_bucket_id}"
     autoscaling_group_name = "nodes"
     kubernetes_master_tag  = ""
-    kubernetes_version     = "${var.kubernetes_version}"
-    kops_version           = "${var.kops_version}"
+    kubernetes_version     = "${var.kubernetes["version"]}"
+    kubelet_sha            = "${var.kubernetes["kubelet_sha"]}"
+    kubectl_sha            = "${var.kubernetes["kubectl_sha"]}"
+    kops_version           = "${var.kops["version"]}"
+    utils_sha              = "${var.kops["utils_sha"]}"
   }
 }
 
