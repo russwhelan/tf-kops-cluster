@@ -102,3 +102,22 @@ resource "aws_security_group" "node" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+module "web_asg_auto_updates" {
+  source = "tf-aws-asg-automatic-updates"
+
+  asg_name     = "${aws_autoscaling_group.node.name}"
+  asg_max_size = "${aws_autoscaling_group.node.max_size}"
+
+  # Check for a new Launch Configuration every 5 minutes.
+  schedule = "rate(5 minutes)"
+
+  # Replace instances using this update strategy.
+  strategy = "rolling-add"
+
+  # Update instances immediately after Terraform changes the ASG's
+  # Launch Configuation, rather than waiting for the schedule.
+  triggers {
+    launch_configuration_id = "${aws_launch_configuration.node.id}"
+  }
+}

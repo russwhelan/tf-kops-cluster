@@ -255,3 +255,22 @@ resource "aws_ebs_volume" "etcd-main" {
     "k8s.io/role/master" = "1"
   }
 }
+
+module "web_asg_auto_updates" {
+  source = "tf-aws-asg-automatic-updates"
+
+  asg_name     = "${aws_autoscaling_group.master.name}"
+  asg_max_size = "${aws_autoscaling_group.master.max_size}"
+
+  # Check for a new Launch Configuration every 5 minutes.
+  schedule = "rate(5 minutes)"
+
+  # Replace instances using this update strategy.
+  strategy = "rolling-add"
+
+  # Update instances immediately after Terraform changes the ASG's
+  # Launch Configuation, rather than waiting for the schedule.
+  triggers {
+    launch_configuration_id = "${aws_launch_configuration.master.id}"
+  }
+}
