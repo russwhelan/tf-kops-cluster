@@ -104,7 +104,7 @@ resource "aws_security_group" "node" {
 }
 
 module "nodes_asg_auto_updates" {
-  source = "tf-aws-asg-automatic-updates"
+  source = "../../../tf-aws-asg-automatic-updates"
 
   asg_name     = "${aws_autoscaling_group.node.name}"
   asg_max_size = "${aws_autoscaling_group.node.max_size}"
