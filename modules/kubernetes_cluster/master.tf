@@ -191,6 +191,7 @@ data "template_file" "master_user_data" {
     kubelet_sha            = "${var.kubernetes["kubelet_sha"]}"
     kubectl_sha            = "${var.kubernetes["kubectl_sha"]}"
     kops_version           = "${var.kops["version"]}"
+    protokube_sha          = "${var.kops["protokube_sha"]}"
     utils_sha              = "${var.kops["utils_sha"]}"
   }
 }

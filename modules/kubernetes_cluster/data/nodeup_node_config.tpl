@@ -18,7 +18,7 @@ ${kubernetes_master_tag}
 channels:
 - s3://${kops_s3_bucket_id}/${cluster_fqdn}/addons/bootstrap-channel.yaml
 protokubeImage:
-  hash: 5bd97a02f0793d1906e9f446c548ececf1444737
+  hash: ${protokube_sha}
   name: protokube:${kops_version}
   source: https://kubeupv2.s3.amazonaws.com/kops/${kops_version}/images/protokube.tar.gz
 

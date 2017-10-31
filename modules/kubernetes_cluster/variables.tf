@@ -78,6 +78,7 @@ variable "kubernetes" {
 variable "kops" {
   default = { 
     version = "1.7.1"
+    protokube_sha = "8f796b29894b0184bff97906d072284c8e579331"
     utils_sha = "c18ca557507c662e3a072c3475da9bd1bc8a503b"
   }
 }
