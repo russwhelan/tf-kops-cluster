@@ -256,7 +256,7 @@ resource "aws_ebs_volume" "etcd-main" {
   }
 }
 
-module "web_asg_auto_updates" {
+module "master_asg_auto_updates" {
   source = "tf-aws-asg-automatic-updates"
 
   asg_name     = "${aws_autoscaling_group.master.name}"
