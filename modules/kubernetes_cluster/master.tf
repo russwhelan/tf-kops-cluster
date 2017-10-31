@@ -31,6 +31,13 @@ resource "aws_autoscaling_group" "master" {
     value               = "1"
     propagate_at_launch = true
   }
+
+  tag = {
+    key                 = "KubernetesCluster"
+    value               = "${local.cluster_fqdn}"
+    propagate_at_launch = true
+  }
+
 }
 
 resource "aws_elb" "master" {
